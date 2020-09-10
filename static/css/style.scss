@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+@import "bootstrap/bootstrap.scss";
+
+
+body {
+    min-height: 100vh;
+    font-family: "Montserrat", sans-serif;
+
+    &.home-bg,
+    &.success-bg,
+    &.error-bg {
+        background-image: url(../img/mobile_left.svg), url(../img/mobile_right.svg);
+        background-position: left bottom, right top;
+        background-repeat: no-repeat, no-repeat;
+    }
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: -1.5px;
+    color: $white;
+}
+
+p {
+    font-size: 14px;
+    line-height: 21px;
+    color: $dark;
+}
+
+a {
+    &:link,
+    &:visited {
+        color: $primary;
+    }
+
+    &:hover {
+        color: darken($color: $primary, $amount: 5%);
+    }
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.btn {
+    padding: 12px 16px;
+    border: none;
+    border-radius: 7px;
+
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 24px;
+
+    &.btn-primary {
+        color: $secondary;
+    }
+
+    &.btn-secondary {
+        color: $primary;
+    }
+}
+
+input[type="text"] {
+    padding: 12px 16px;
+
+    background: $white;
+    border: none;
+    border-radius: 7px;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+
+    &::placeholder {
+        color: $dark;
+    }
+}
+
+// Example usage:
+@include media-breakpoint-up(sm) {
+    h1 {
+        font-size: 54px;
+        line-height: 60px;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .btn {
+        padding: 18px 28px;
+
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    input[type="text"] {
+        padding: 18px 28px;
+
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    body {
+
+        &.home-bg {
+            background-image: url(../img/home_left.svg), url(../img/home_right.svg);
+        }
+        &.success-bg {
+            background-image: url(../img/done_left.svg), url(../img/done_right.svg);
+        }
+        &.error-bg {
+            background-image: url(../img/error_left.svg), url(../img/error_right.svg);
+            background-position: left top, right top;
+        }
+
+        &.home-bg, &.success-bg, &.error-bg {
+            background-size: auto 25%, auto 50%;
+        }
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    body {
+        &.home-bg, &.success-bg, &.error-bg {
+            background-size: 30% auto, auto 70%;
+        }
+    }
+}
+
+@include media-breakpoint-up(xl) {
+    body {
+        &.home-bg, &.success-bg, &.error-bg {
+            background-size: auto, auto;
+        }
+    }
+}
