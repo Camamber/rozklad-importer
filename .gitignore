@@ -2,3 +2,5 @@ vendor
 .vscode
 .idea
 cache/*.ch
+
+.env
