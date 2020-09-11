@@ -11,7 +11,7 @@ class OAuth2Controller
     {
         $client = new Google_Client();
         $client->setAuthConfig('client_secret.json');
-        $client->setRedirectUri($_ENV['APP_URL'] . '/oauth2callback');
+        $client->setRedirectUri($_ENV['APP_URL'] . $_ENV['APP_ROOT_PATH'] . '/oauth2callback');
         $client->addScope(Google_Service_Calendar::CALENDAR);
 
         if (!isset($_GET['code'])) {
@@ -19,7 +19,7 @@ class OAuth2Controller
             header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
         } else {
             $_SESSION['access_token'] = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-            $redirect_uri =  $_SESSION['ORIGIN_URL']; //$_ENV['APP_URL'] . '/';
+            $redirect_uri =  $_SESSION['ORIGIN_URL'];
             header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
         }
     }

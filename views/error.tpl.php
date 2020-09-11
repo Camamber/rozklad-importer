@@ -19,7 +19,7 @@
         </div>
         <div class="row justify-content-center mt-3">
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                <a class="btn btn-primary w-100" href="/">Спробувати ще раз</a>
+                <a class="btn btn-primary w-100" href="<?php echo $_ENV['APP_ROOT_PATH'] ?>/">Спробувати ще раз</a>
             </div>
         </div>
     </div>

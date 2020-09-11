@@ -17,7 +17,7 @@
                 <a class="btn btn-primary w-100" href="https://calendar.google.com" target="_blank" rel="noopener noreferrer">Переглянути календар</a>
             </div>
             <div class="col-10 col-md-4 col-lg-3 col-xl-2 mt-3 mt-sm-0">
-                <a class="btn btn-secondary w-100" href="/">На головну</a>
+                <a class="btn btn-secondary w-100" href="<?php echo $_ENV['APP_ROOT_PATH'] ?>/">На головну</a>
             </div>
         </div>
 

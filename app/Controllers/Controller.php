@@ -33,11 +33,11 @@ class Controller
             $scheduleImporterService = new ScheduleImporterService($client);
             $scheduleImporterService->import($schedule);
 
-            header('Location: ' . filter_var($_ENV['APP_URL'] . '/success', FILTER_SANITIZE_URL));
+            header('Location: ' . filter_var($_ENV['APP_URL'] . $_ENV['APP_ROOT_PATH'] . '/success', FILTER_SANITIZE_URL));
         } else {
             $_SESSION['ORIGIN_URL'] = $_ENV['APP_URL'] . $_SERVER['REQUEST_URI'];
 
-            $redirect_uri = $_ENV['APP_URL'] . '/oauth2callback';
+            $redirect_uri = $_ENV['APP_URL'] . $_ENV['APP_ROOT_PATH'] . '/oauth2callback';
             header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
         }
     }

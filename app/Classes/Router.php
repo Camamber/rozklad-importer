@@ -21,7 +21,7 @@ class Router
     {
         $handlerClassMethod = explode('@', $handler);
 
-        self::$routes[$method . '_' . $route] = [
+        self::$routes[$method . '_' . $_ENV['APP_ROOT_PATH'] . $route] = [
             'class' => '\\App\\Controllers\\' . $handlerClassMethod[0],
             'method' => $handlerClassMethod[1]
         ];
