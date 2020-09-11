@@ -25,4 +25,14 @@
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="shortcut icon" href="static/img/favicon.png" type="image/png" sizes="100x100">
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177802567-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-177802567-1');
+    </script>
+
 </head>
