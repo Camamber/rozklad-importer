@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Classes\Log;
 use Carbon\Carbon;
 use Google_Client;
 use Google_Http_Batch;
@@ -24,7 +25,7 @@ class ScheduleImporterService
         $time_start = microtime(true);
         $calendarId = $this->createCalendar('Розклад занять ' . $schedule['group']);
         $time_elapsed = microtime(true) - $time_start;
-        file_put_contents(__DIR__ . '/log.txt', 'Create calndar: ' . $time_elapsed . PHP_EOL, FILE_APPEND);
+        Log::info('Create calndar: ' . $time_elapsed );
 
         $firstSeptember = Carbon::now()->startOfMonth()->month(9);
         if ($firstSeptember->greaterThan(Carbon::now())) {
@@ -76,7 +77,7 @@ class ScheduleImporterService
 
         // $events = $batch->execute();
         $time_elapsed = microtime(true) - $time_start;
-        file_put_contents(__DIR__ . '/log.txt', 'Insert events: ' . $time_elapsed . PHP_EOL, FILE_APPEND);
+        Log::info('Insert events: ' . $time_elapsed );
     }
 
     private function formatSummary($class)

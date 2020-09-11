@@ -11,7 +11,8 @@
         "guzzlehttp/guzzle": "^7.0",
         "google/apiclient": "^2.7",
         "vlucas/phpdotenv": "^5.1",
-        "nesbot/carbon": "^2.39"
+        "nesbot/carbon": "^2.39",
+        "monolog/monolog": "^2.1"
     },
     "scripts": {
         "post-update-cmd": "Google_Task_Composer::cleanup"
