@@ -5,3 +5,4 @@ cache/*.ch
 
 .env
 client_secret.json
+*.log

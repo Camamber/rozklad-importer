@@ -1,4 +1,5 @@
 <?php
+define('__BASEDIR__', __DIR__);
 require __DIR__ . '/vendor/autoload.php';
 
 use App\Classes\Router;
