@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "83938fb6604d290e3af1e316d5809237",
+    "content-hash": "a3b10c83ded1b82ba0eeb41f7badb38d",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -58,16 +58,16 @@
         },
         {
             "name": "google/apiclient",
-            "version": "v2.7.0",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client.git",
-                "reference": "48ec94577b51bde415270116118b07a294e07c43"
+                "reference": "e748d1d5a51166754f13809d35f1fa162cbec530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/48ec94577b51bde415270116118b07a294e07c43",
-                "reference": "48ec94577b51bde415270116118b07a294e07c43",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/e748d1d5a51166754f13809d35f1fa162cbec530",
+                "reference": "e748d1d5a51166754f13809d35f1fa162cbec530",
                 "shasum": ""
             },
             "require": {
@@ -116,20 +116,20 @@
             "keywords": [
                 "google"
             ],
-            "time": "2020-07-23T21:37:43+00:00"
+            "time": "2020-09-08T16:38:08+00:00"
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.144",
+            "version": "v0.145",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "74c5fc850d9ce441c6b3e52af11b986cd11d379a"
+                "reference": "96de5dabadb693f161a31a1a1e018882fa05816e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/74c5fc850d9ce441c6b3e52af11b986cd11d379a",
-                "reference": "74c5fc850d9ce441c6b3e52af11b986cd11d379a",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/96de5dabadb693f161a31a1a1e018882fa05816e",
+                "reference": "96de5dabadb693f161a31a1a1e018882fa05816e",
                 "shasum": ""
             },
             "require": {
@@ -153,20 +153,20 @@
             "keywords": [
                 "google"
             ],
-            "time": "2020-08-30T00:24:57+00:00"
+            "time": "2020-09-05T00:24:41+00:00"
         },
         {
             "name": "google/auth",
-            "version": "v1.11.1",
+            "version": "v1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "bb959e91bd8ffbd352ab76cbf11d656ce6435088"
+                "reference": "74cad289014f7ef747618480f6b59f6303357f34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/bb959e91bd8ffbd352ab76cbf11d656ce6435088",
-                "reference": "bb959e91bd8ffbd352ab76cbf11d656ce6435088",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/74cad289014f7ef747618480f6b59f6303357f34",
+                "reference": "74cad289014f7ef747618480f6b59f6303357f34",
                 "shasum": ""
             },
             "require": {
@@ -205,7 +205,7 @@
                 "google",
                 "oauth2"
             ],
-            "time": "2020-07-27T18:33:35+00:00"
+            "time": "2020-09-08T16:33:56+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -565,16 +565,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.39.1",
+            "version": "2.39.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "7af467873250583cc967a59ee9df29fabab193c1"
+                "reference": "326efde1bc09077a26cb77f6e2e32e13f06c27f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/7af467873250583cc967a59ee9df29fabab193c1",
-                "reference": "7af467873250583cc967a59ee9df29fabab193c1",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/326efde1bc09077a26cb77f6e2e32e13f06c27f2",
+                "reference": "326efde1bc09077a26cb77f6e2e32e13f06c27f2",
                 "shasum": ""
             },
             "require": {
@@ -650,7 +650,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-04T13:11:37+00:00"
+            "time": "2020-09-10T12:16:42+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -719,16 +719,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.28",
+            "version": "2.0.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "d1ca58cf33cb21046d702ae3a7b14fdacd9f3260"
+                "reference": "497856a8d997f640b4a516062f84228a772a48a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/d1ca58cf33cb21046d702ae3a7b14fdacd9f3260",
-                "reference": "d1ca58cf33cb21046d702ae3a7b14fdacd9f3260",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/497856a8d997f640b4a516062f84228a772a48a8",
+                "reference": "497856a8d997f640b4a516062f84228a772a48a8",
                 "shasum": ""
             },
             "require": {
@@ -737,7 +737,6 @@
             "require-dev": {
                 "phing/phing": "~2.7",
                 "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
-                "sami/sami": "~2.0",
                 "squizlabs/php_codesniffer": "~2.0"
             },
             "suggest": {
@@ -821,7 +820,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-08T09:08:33+00:00"
+            "time": "2020-09-08T04:24:43+00:00"
         },
         {
             "name": "psr/cache",
@@ -1382,16 +1381,16 @@
         },
         {
             "name": "symfony/translation-contracts",
-            "version": "v2.1.3",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
-                "reference": "616a9773c853097607cf9dd6577d5b143ffdcd63"
+                "reference": "77ce1c3627c9f39643acd9af086631f842c50c4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/616a9773c853097607cf9dd6577d5b143ffdcd63",
-                "reference": "616a9773c853097607cf9dd6577d5b143ffdcd63",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/77ce1c3627c9f39643acd9af086631f842c50c4d",
+                "reference": "77ce1c3627c9f39643acd9af086631f842c50c4d",
                 "shasum": ""
             },
             "require": {
@@ -1403,7 +1402,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.2-dev"
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -1453,7 +1452,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-06T13:23:11+00:00"
+            "time": "2020-09-07T11:33:47+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

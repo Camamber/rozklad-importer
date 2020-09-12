@@ -21,13 +21,13 @@ class Log
         return self::$instance;
     }
 
-    public static function info(string $message)
+    public static function info($message, array $context = []): void
     {
-        self::getInstance()->info($message);
+        self::getInstance()->info($message, $context);
     }
 
-    public static function error(string $message)
+    public static function error($message, array $context = []): void
     {
-        self::getInstance()->error($message);
+        self::getInstance()->error($message, $context);
     }
 }

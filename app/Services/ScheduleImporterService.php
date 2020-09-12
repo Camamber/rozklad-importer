@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
+use App\Classes\GoogleClient;
 use App\Classes\Log;
 use Carbon\Carbon;
-use Google_Client;
 use Google_Http_Batch;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Calendar;
@@ -15,24 +15,23 @@ class ScheduleImporterService
 {
     private $service;
 
-    public function __construct(Google_Client $client)
+    public function __construct()
     {
-        $this->service = new Google_Service_Calendar($client);
+        $this->service = new Google_Service_Calendar(GoogleClient::getInstance());
     }
 
     public function import($schedule)
     {
-        $time_start = microtime(true);
+        $time_start_calendar = microtime(true);
         $calendarId = $this->createCalendar('Розклад занять ' . $schedule['group']);
-        $time_elapsed = microtime(true) - $time_start;
-        Log::info('Create calndar: ' . $time_elapsed );
+        $time_elapsed_calendar = microtime(true) - $time_start_calendar;
 
         $firstSeptember = Carbon::now()->startOfMonth()->month(9);
         if ($firstSeptember->greaterThan(Carbon::now())) {
             $firstSeptember = $firstSeptember->subYear();
         }
 
-        $time_start = microtime(true);
+        $time_start_events = microtime(true);
         // $this->service->getClient()->setUseBatch(true);
         // $batch = $this->service->createBatch();
         $events = [];
@@ -74,10 +73,12 @@ class ScheduleImporterService
         // foreach ($events as $event) {
         //     $batch->add($event);
         // }
-
         // $events = $batch->execute();
-        $time_elapsed = microtime(true) - $time_start;
-        Log::info('Insert events: ' . $time_elapsed );
+        $time_elapsed_events = microtime(true) - $time_start_events;
+
+        $time_elapsed_total = $time_elapsed_calendar + $time_elapsed_events;
+        $context = array_merge(['group' => $schedule['group']], GoogleClient::user()->toArray());
+        Log::info("Import schedule: calendar - $time_elapsed_calendar; events - $time_elapsed_events; total - $time_elapsed_total", $context);
     }
 
     private function formatSummary($class)
