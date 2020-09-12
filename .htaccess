@@ -1,7 +1,21 @@
-RewriteEngine On
+<FilesMatch "client_secret.json|.env|.htaccess">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
 
+<FilesMatch "events.log">
+    Order Deny,Allow
+    Deny from all
+    Allow from localhost
+    Allow from 127.0.0.1
+    Allow from 93.74.46.74
+</FilesMatch>
+
+RewriteEngine On
 RewriteBase /rozklad
+
 RewriteRule ^index\.php$ - [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /rozklad/index.php [L]
+RewriteRule ^ %{ENV:BASE}index.php [L]
