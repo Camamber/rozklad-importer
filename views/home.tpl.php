@@ -59,7 +59,7 @@
             fetch('api/groups?query=' + e.target.value, )
                 .then((response) => response.json())
                 .then((data) => {
-                    if (!data) return;
+                    if (!data || !data.length) return;
 
                     const ul = document.querySelector('.hint-list')
                     ul.innerHTML = '';
