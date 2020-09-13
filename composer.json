@@ -7,12 +7,17 @@
             "email": "egorka.k2009@gmail.com"
         }
     ],
+    "config": {
+        "platform": {
+            "php": "7.2"
+        }
+    },
     "require": {
-        "guzzlehttp/guzzle": "^7.0",
+        "guzzlehttp/guzzle": "^6.5",
         "google/apiclient": "^2.7",
-        "vlucas/phpdotenv": "^5.1",
-        "nesbot/carbon": "^2.39",
-        "monolog/monolog": "^2.1"
+        "vlucas/phpdotenv": "^4.1",
+        "nesbot/carbon": "^2.0.0",
+        "monolog/monolog": "^1.25"
     },
     "scripts": {
         "post-update-cmd": "Google_Task_Composer::cleanup"
@@ -25,7 +30,10 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app" 
+            "App\\": "app"
         }
+    },
+    "require-dev": {
+        "composer/composer": "^1.10"
     }
 }
