@@ -1,7 +1,7 @@
 <?php include('layout/header.php') ?>
 
 <body class="error-bg">
-    <div class="container pt-6 pb-4">
+    <div class="container pt-5 pt-lg-6 pb-4">
         <div class="row justify-content-center pb-md-4">
             <div class="col-12 col-md-6 col-lg-4">
                 <img class="w-100" src="static/img/pixeltrue-error.svg" alt="KPI ROZKLAD Error">
