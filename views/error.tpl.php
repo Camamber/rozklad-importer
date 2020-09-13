@@ -14,7 +14,7 @@
         </div>
         <div class="row justify-content-center mt-3 pb-md-3">
             <div class="col-12 col-md-8 col-lg-6">
-                <p class="mb-0 text-center">Можливо просто немає інтернету. Або ти щось не так ввів. Як би там не було, не здавайся та спробуй ще раз!</p>
+                <p class="mb-0 text-center"><?php echo $message ?> Або ти щось не так ввів. Як би там не було, не здавайся та спробуй ще раз!</p>
             </div>
         </div>
         <div class="row justify-content-center mt-3">

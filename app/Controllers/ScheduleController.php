@@ -6,6 +6,12 @@ use App\Services\RozkladParserService;
 
 class ScheduleController
 {
+    private $rozkladParserService;
+
+    public function __construct()
+    {
+        $this->rozkladParserService = new RozkladParserService();
+    }
 
     public function index($request)
     {
@@ -13,9 +19,20 @@ class ScheduleController
             return null;
         }
 
-        $rozkladParserService = new RozkladParserService();
-        $schedule = $rozkladParserService->parse($_GET['group']);
+
+        $schedule = $this->rozkladParserService->parse($_GET['group']);
         header('Content-Type: application/json');
         echo json_encode($schedule);
+    }
+
+    public function groups($request)
+    {
+        header('Content-Type: application/json');
+        if (!isset($_GET['query'])) {
+            echo json_encode([]);
+        }
+        
+        $groups = $this->rozkladParserService->fetchGroups($_GET['query']);
+        echo json_encode($groups);
     }
 }

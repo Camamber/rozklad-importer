@@ -29,6 +29,8 @@ class Router
 
     public static function buildRoute()
     {
+        set_exception_handler(array(self::class, "handleException"));
+
         /*Определяем контроллер*/
         $key = $_SERVER['REQUEST_METHOD'] . '_' . strtok($_SERVER["REQUEST_URI"], '?');
         if (isset(self::$routes[$key])) {
@@ -40,12 +42,21 @@ class Router
             return header("HTTP/1.0 404 Not Found");
         }
 
-        try {
-            $controller = new $controllerName();
-            $controller->$action($_REQUEST);
-        } catch (\Exception $ex) {
-            $controller = new \App\Controllers\ErrorController();
-            $controller->index(500);
+        $controller = new $controllerName();
+        $controller->$action($_REQUEST);
+    }
+
+
+    public static function handleException(\Exception $exception)
+    {   
+        $message = sprintf("%s: %s\n in %s:%d", get_class($exception), $exception->getMessage(), $exception->getFile(), $exception->getLine());
+        Log::error($message);
+
+        if (!($exception instanceof \App\Exceptions\AppException)) {
+            $exception = \App\Exceptions\AppException::fromException($exception);
         }
+        
+        $controller = new \App\Controllers\ErrorController();
+        $controller->index($exception->getPublicMessage(), $exception->getCode());
     }
 }

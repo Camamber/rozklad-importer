@@ -23,8 +23,8 @@ class GoogleClient
             self::$instance->setAuthConfig('client_secret.json');
             self::$instance->setRedirectUri($_ENV['APP_URL'] . $_ENV['APP_ROOT_PATH'] . '/oauth2callback');
             self::$instance->addScope([
-                Google_Service_Oauth2::USERINFO_EMAIL,
-                Google_Service_Oauth2::USERINFO_PROFILE,
+                // Google_Service_Oauth2::USERINFO_EMAIL,
+                // Google_Service_Oauth2::USERINFO_PROFILE,
                 Google_Service_Calendar::CALENDAR,
                 Google_Service_Calendar::CALENDAR_EVENTS,
             ]);
@@ -49,8 +49,9 @@ class GoogleClient
     }
 
     public static function user() {
-        $oauth2 = new Google_Service_Oauth2(self::getInstance());
-        $userInfo = $oauth2->userinfo->get();
+        // $oauth2 = new Google_Service_Oauth2(self::getInstance());
+        // $userInfo = $oauth2->userinfo->get();
+        $userInfo = json_decode(json_encode(['email' => '@', 'gender' => null, 'name' => 'test', 'picture' => 'f']));
         return User::fromGoogleUser($userInfo);
         
     }

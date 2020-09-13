@@ -16,6 +16,7 @@ Router::get('/', 'Controller@show');
 Router::get('/success', 'Controller@success');
 Router::get('/oauth2callback', 'OAuth2Controller@index');
 Router::get('/api/schedule', 'ScheduleController@index');
+Router::get('/api/groups', 'ScheduleController@groups');
 
 
 Router::buildRoute();

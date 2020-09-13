@@ -97,4 +97,22 @@ class RozkladParserService
         }
         return $week;
     }
+
+    public function fetchGroups($query)
+    {
+        $client = new Client();
+        $response = $client->request('POST', 'http://rozklad.kpi.ua/Schedules/ScheduleGroupSelection.aspx/GetGroups', [
+            'json' => [
+                'prefixText' => $query,
+                'count' => 10
+            ]
+        ]);
+
+        $body = json_decode($response->getBody());
+        $json = [];
+        if ($body->d) {
+            $json = array_merge($json, $body->d);
+        }
+        return $json;
+    }
 }

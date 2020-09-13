@@ -7,8 +7,8 @@ class Cache
     public static function remember(string $key, int $ttl, $callback)
     {
         $hashedKey = md5($key);
-        $data = file_get_contents("cache/{$hashedKey}.ch");
-        if ($data) {
+        if (file_exists("cache/{$hashedKey}.ch")) {
+            $data = file_get_contents("cache/{$hashedKey}.ch");
             $data = json_decode($data, true);
         } else {
             $data = $callback();

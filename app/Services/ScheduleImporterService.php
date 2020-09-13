@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Classes\GoogleClient;
 use App\Classes\Log;
 use Carbon\Carbon;
-use Google_Http_Batch;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Calendar;
 use Google_Service_Calendar_Event;
@@ -13,6 +12,8 @@ use Google_Service_Calendar_Event;
 
 class ScheduleImporterService
 {
+    // $this->service->getClient()->setUseBatch(true);
+    // $batch = $this->service->createBatch();
     private $service;
 
     public function __construct()
@@ -22,19 +23,12 @@ class ScheduleImporterService
 
     public function import($schedule)
     {
-        $time_start_calendar = microtime(true);
-        $calendarId = $this->createCalendar('Розклад занять ' . $schedule['group']);
-        $time_elapsed_calendar = microtime(true) - $time_start_calendar;
+        $events = [];
 
         $firstSeptember = Carbon::now()->startOfMonth()->month(9);
         if ($firstSeptember->greaterThan(Carbon::now())) {
             $firstSeptember = $firstSeptember->subYear();
         }
-
-        $time_start_events = microtime(true);
-        // $this->service->getClient()->setUseBatch(true);
-        // $batch = $this->service->createBatch();
-        $events = [];
 
         foreach ($schedule['weeks'] as $weekNumber => $week) {
             $dateTime = $firstSeptember->clone()->startOfWeek();
@@ -65,15 +59,23 @@ class ScheduleImporterService
                         ],
                     ]);
 
-                    $events[] = $this->service->events->insert($calendarId, $event);
+                    $events[] = $event;
                 }
             }
         }
 
-        // foreach ($events as $event) {
-        //     $batch->add($event);
-        // }
-        // $events = $batch->execute();
+        if(!count($events)) {
+            throw new \App\Exceptions\EmptyScheduleException($schedule['group']);
+        }
+
+        $time_start_calendar = microtime(true);
+        $calendarId = $this->createCalendar('Розклад занять ' . $schedule['group']);
+        $time_elapsed_calendar = microtime(true) - $time_start_calendar;
+
+        $time_start_events = microtime(true);
+        foreach ($events as $event) {
+            $this->service->events->insert($calendarId, $event);
+        }
         $time_elapsed_events = microtime(true) - $time_start_events;
 
         $time_elapsed_total = $time_elapsed_calendar + $time_elapsed_events;

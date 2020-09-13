@@ -14,13 +14,21 @@ class Controller
         if (!isset($_GET['group'])) {
             return include('views/home.tpl.php');
         }
-        
         $group = $_GET['group'];
+
+        $rozkladParserService = new RozkladParserService();
+        $groups = $rozkladParserService->fetchGroups($group);
+        $group = current(array_filter($groups, function ($g) use ($group) {
+            return strtolower($group) == strtolower($g);
+        }));
+        if (!$group) {
+            throw new \App\Exceptions\GroupNotFoundException($group);
+        }
+
         if (isset($_SESSION['access_token']) && $_SESSION['access_token'] && $_SESSION['access_token']['created'] + $_SESSION['access_token']['expires_in'] > time()) {
             GoogleClient::setAccessToken($_SESSION['access_token']);
 
-            $schedule = Cache::remember($group, 60, function () use ($group) {
-                $rozkladParserService = new RozkladParserService();
+            $schedule = Cache::remember($group, 60, function () use ($rozkladParserService, $group) {
                 return $rozkladParserService->parse($group);
             });
 
