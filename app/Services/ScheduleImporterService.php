@@ -64,10 +64,6 @@ class ScheduleImporterService
             }
         }
 
-        if(!count($events)) {
-            throw new \App\Exceptions\EmptyScheduleException($schedule['group']);
-        }
-
         $time_start_calendar = microtime(true);
         $calendarId = $this->createCalendar('Розклад занять ' . $schedule['group']);
         $time_elapsed_calendar = microtime(true) - $time_start_calendar;
