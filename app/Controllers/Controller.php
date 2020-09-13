@@ -22,7 +22,7 @@ class Controller
             return strtolower($group) == strtolower($g);
         }));
         if (!$group) {
-            throw new \App\Exceptions\GroupNotFoundException($group);
+            throw new \App\Exceptions\GroupNotFoundException($_GET['group']);
         }
 
         if (isset($_SESSION['access_token']) && $_SESSION['access_token'] && $_SESSION['access_token']['created'] + $_SESSION['access_token']['expires_in'] > time()) {
