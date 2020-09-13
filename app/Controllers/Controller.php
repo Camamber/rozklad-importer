@@ -60,6 +60,7 @@ class Controller
         if(!count($schedule['weeks'][0]) && !count($schedule['weeks'][1])) {
             throw new \App\Exceptions\EmptyScheduleException($group);
         }
+        return $schedule;
     }
 
     public function success($request)
