@@ -25,7 +25,7 @@ class ScheduleImporterService
     {
         $events = [];
 
-        $firstSeptember = Carbon::now()->startOfMonth()->month(9);
+        $firstSeptember = Carbon::now()->timezone('Europe/Kiev')->startOfMonth()->month(9);
         if ($firstSeptember->greaterThan(Carbon::now())) {
             $firstSeptember = $firstSeptember->subYear();
         }

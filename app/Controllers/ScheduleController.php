@@ -28,6 +28,9 @@ class ScheduleController
     public function groups($request)
     {
         header('Content-Type: application/json');
+        echo json_encode([]);
+        return;
+        
         if (!isset($_GET['query'])) {
             echo json_encode([]);
         }

@@ -76,24 +76,38 @@ class RozkladParserService
 
                 $class['time'] = $rawTime->br2nl()->explode("\n")[1];
 
-                $tmp = new Str(HtmlHelper::getInnerHtml($rowDays[$j]));
-                $tmp = $tmp->br2nl()->explode("\n");
-                $class['type'] = trim(end($tmp));
-
                 if (($tmp = $rowDays[$j]->getElementsByTagName('a')) && count($tmp)) {
-                    if (isset($tmp[0])) {
-                        $class['full_name'] =  $tmp[0]->getAttribute('title');
-                        $class['short_name'] = $tmp[0]->textContent;
+                    for ($k = 0; $k < $tmp->count(); $k++) {
+                        $href = $tmp->item($k)->getAttribute('href');
+                        if (strpos($href, 'wiki.kpi.ua')) {
+                            $class['full_name'][] = $tmp->item($k)->getAttribute('title');
+                            $class['short_name'][] = $tmp->item($k)->textContent;
+                        } else if (strpos($href, 'Schedules')) {
+                            $class['teacher']['full_name'][] =  $tmp->item($k)->getAttribute('title');
+                            $class['teacher']['short_name'][] = $tmp->item($k)->textContent;
+                        } else if (strpos($href, 'maps.google.com')) {
+                            $class['type'][] = $tmp->item($k)->textContent;
+                        }
                     }
 
-                    if (isset($tmp[1])) {
-                        $class['teacher']['full_name'] =  $tmp[1]->getAttribute('title');
-                        $class['teacher']['short_name'] = $tmp[1]->textContent;
+                    $class['full_name'] = implode(', ', $class['full_name']);
+                    $class['short_name'] = implode(', ', $class['short_name']);
+                    if (isset($class['teacher'])) {
+                        $class['teacher']['full_name'] = implode(', ',  $class['teacher']['full_name']);
+                        $class['teacher']['short_name'] = implode(', ', $class['teacher']['short_name']);
+                    }
+
+                    if (isset($class['type']) && count($class['type'])) {
+                        $class['type'] =  implode(', ', $class['type']);
+                    } else {
+                        $type = new Str(HtmlHelper::getInnerHtml($rowDays[$j]));
+                        $type = $type->br2nl()->explode("\n");
+                        $class['type'] = trim(end($type));
                     }
                 }
-
                 $week[$j - 1][] = $class;
             }
+
         }
         return $week;
     }
