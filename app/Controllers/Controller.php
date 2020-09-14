@@ -67,4 +67,9 @@ class Controller
     {
         return include('views/success.tpl.php');
     }
+
+    public function maintance($request)
+    {
+        return include('views/maintance.tpl.php');
+    }
 }

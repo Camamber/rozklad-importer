@@ -12,7 +12,7 @@ session_start();
 
 
 /** Register routes */
-Router::get('/', 'Controller@show');
+Router::get('/', 'Controller@maintance');
 Router::get('/success', 'Controller@success');
 Router::get('/oauth2callback', 'OAuth2Controller@index');
 Router::get('/api/schedule', 'ScheduleController@index');
