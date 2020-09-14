@@ -44,7 +44,7 @@ class Controller
     {
         $groups = $this->rozkladParserService->fetchGroups($group);
         $findedGroup = current(array_filter($groups, function ($g) use ($group) {
-            return strtolower($g) == strtolower($group);
+            return mb_strtolower($g, 'UTF-8') == mb_strtolower($group, 'UTF-8');
         }));
         if (!$findedGroup) {
             throw new \App\Exceptions\GroupNotFoundException($group);
@@ -54,7 +54,7 @@ class Controller
 
     private function checkSchedule($group)
     {
-        $schedule = Cache::remember($group, 24*60*60, function () use ($group) {
+        $schedule = Cache::remember('parseSchedule'.$group, 24*60*60, function () use ($group) {
             return $this->rozkladParserService->parse($group);
         });
         if(!count($schedule['weeks'][0]) && !count($schedule['weeks'][1])) {
