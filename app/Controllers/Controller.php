@@ -54,7 +54,7 @@ class Controller
 
     private function checkSchedule($group)
     {
-        $schedule = Cache::remember('parseSchedule'.$group, 24*60*60, function () use ($group) {
+        $schedule = Cache::remember('parseSchedule'.$group, 12*60*60, function () use ($group) {
             return $this->rozkladParserService->parse($group);
         });
         if(!count($schedule['weeks'][0]) && !count($schedule['weeks'][1])) {
