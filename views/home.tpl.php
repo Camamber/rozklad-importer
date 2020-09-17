@@ -118,7 +118,7 @@
         function searchGroup(e) {
             e.target.classList.remove('input-error');
             document.querySelector('form .input-error-hint').style['display'] = 'none';
-            if (!e.target.value.length) return;
+            if (!e.target.value.length || e.target.value.length < 2) return;
 
             fetch('api/groups?query=' + e.target.value, )
                 .then((response) => response.json())
