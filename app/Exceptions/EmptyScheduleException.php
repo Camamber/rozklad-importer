@@ -11,7 +11,8 @@ class EmptyScheduleException extends AppException
     {
         $translitGroup = (new Str($group))->translit();
         parent::__construct("Schedule for {$translitGroup} is empty.", 400);
-        $link = '<a href="http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx?g=' . $groupId . '">http://rozklad.kpi.ua/' . $translitGroup . '</a>';
+
+        $link = '<a href="http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx?g=' . $groupId . '" target="_blank" rel="noopener noreferrer">http://rozklad.kpi.ua/' . $translitGroup . '</a>';
         $this->publicMessage = "Розклад для групи «{$group}» виявився порожнім. Розкладу ще немає на сайті {$link}. Спробуй пізніше";
         $this->publicImage = "static/img/empty_group.svg";
     }
