@@ -100,9 +100,15 @@
                 document.querySelector('form .input-error-hint').style['display'] = 'inline';  
             });
 
-            const closeModal = document.querySelector('.modal .close');
+            const modalClose = document.querySelector('.modal .close');
             closeModal.addEventListener('click', () => {
                 window.location.href = window.location.href.split('?')[0];
+            })
+
+            const modalBackdrop = document.querySelector('.modal-backdrop');
+            modalBackdrop.addEventListener('click', (e) => {
+                if(e.target != document.querySelector('.modal'))
+                    window.location.href = window.location.href.split('?')[0];
             })
         });
 
