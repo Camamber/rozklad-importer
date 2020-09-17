@@ -82,6 +82,7 @@ input[type="text"] {
 }
 
 .input-error {
+    box-sizing: border-box;
     border: $primary 2px solid !important;
     color: $primary;
 }
