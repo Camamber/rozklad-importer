@@ -4,7 +4,7 @@
     <div class="container pt-5 pt-lg-6 pb-4">
         <div class="row justify-content-center pb-md-4">
             <div class="col-12 col-md-6 col-lg-4">
-                <img class="w-100" src="<?php echo $image ?>" alt="KPI ROZKLAD Error">
+                <img class="w-100" src="<?php echo $errObj['image'] ?>" alt="KPI ROZKLAD Error">
             </div>
         </div>
         <div class="row justify-content-center mt-3">
@@ -14,7 +14,7 @@
         </div>
         <div class="row justify-content-center mt-3 pb-md-3">
             <div class="col-12 col-md-8 col-lg-6">
-                <p class="mb-0 text-center"><?php echo $message ?></p>
+                <p class="mb-0 text-center"><?php echo $errObj['message'] ?></p>
             </div>
         </div>
         <div class="row justify-content-center mt-3">

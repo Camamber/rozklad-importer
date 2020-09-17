@@ -57,6 +57,6 @@ class Router
         }
         
         $controller = new \App\Controllers\ErrorController();
-        $controller->index($exception->getPublicMessage(), $exception->getCode());
+        $controller->index(['message' => $exception->getPublicMessage(), 'image' => $exception->getPublicImage()], $exception->getCode());
     }
 }
