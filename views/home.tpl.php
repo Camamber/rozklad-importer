@@ -41,12 +41,12 @@
         <div class="modal fade <?php echo isset($groupIds) ? 'show pt-5' : ''  ?>" id="exampleModal" tabindex="-1" role="dialog" style="<?php echo isset($groupIds) ? 'display: block;' : 'display: none;'  ?>" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <!-- <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Схоже що існує декілька однакових груп.</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div> -->
+                    </div>
                     <div class="modal-body">
                         <ul>
                             <?php foreach ($groupIds as $value) { ?>
@@ -99,6 +99,11 @@
                 input.classList.add('input-error');
                 document.querySelector('form .input-error-hint').style['display'] = 'inline';  
             });
+
+            const closeModal = document.querySelector('.modal .close');
+            closeModal.addEventListener('click', () => {
+                window.location.href = window.location.href.split('?')[0];
+            })
         });
 
 
