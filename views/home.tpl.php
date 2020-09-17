@@ -20,7 +20,7 @@
         <form method="get" id="form">
             <div class="row justify-content-center mt-3 pb-md-3">
                 <div class="col-12 col-md-8 col-lg-6">
-                    <input class="w-100 " id="group" name="group" autocomplete="off" type="text" placeholder="Вкажіть вашу групу">
+                    <input class="w-100 " id="group" name="group" autocomplete="off" type="text" placeholder="Вкажіть вашу групу (мінімум 2 символа)">
                     <span class="input-error-hint" style="display: none;">Такої групи не існує, котику. Спробуй ще раз.</span>
                     <div style="position:relative;">
                         <ul class="w-100 hint-list">
@@ -74,7 +74,7 @@
             const ul = document.querySelector('.hint-list')
 
             const input = document.getElementById('group');
-            const debounced = debounce(searchGroup, 500);
+            const debounced = debounce(searchGroup, 300);
             input.addEventListener('input', debounced);
 
             body.addEventListener('click', (e) => {
