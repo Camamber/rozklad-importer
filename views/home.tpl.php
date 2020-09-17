@@ -74,7 +74,7 @@
             const ul = document.querySelector('.hint-list')
 
             const input = document.getElementById('group');
-            const debounced = debounce(searchGroup, 300);
+            const debounced = debounce(searchGroup, 500);
             input.addEventListener('input', debounced);
 
             body.addEventListener('click', (e) => {

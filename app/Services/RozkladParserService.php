@@ -153,6 +153,7 @@ class RozkladParserService
     {
         $client = new Client();
         $response = $client->request('POST', 'http://rozklad.kpi.ua/Schedules/ScheduleGroupSelection.aspx/GetGroups', [
+            'timeout' => 3,
             'json' => [
                 'prefixText' => $query,
                 'count' => 10
