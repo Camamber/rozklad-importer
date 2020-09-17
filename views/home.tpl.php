@@ -42,7 +42,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Схоже що існує декілька однакових груп.</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Воу, існує декілька однакових груп.</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -80,6 +80,7 @@
             body.addEventListener('click', (e) => {
                 if (e.target != input) hideHint(input, ul);
             })
+            
             input.addEventListener('click', () => {
                 if (ul.children.length) showHint(input, ul)
             })
@@ -101,15 +102,16 @@
             });
 
             const modalClose = document.querySelector('.modal .close');
-            closeModal.addEventListener('click', () => {
+            modalClose.addEventListener('click', () => {
                 window.location.href = window.location.href.split('?')[0];
             })
 
-            const modalBackdrop = document.querySelector('.modal-backdrop');
-            modalBackdrop.addEventListener('click', (e) => {
-                if(e.target != document.querySelector('.modal'))
-                    window.location.href = window.location.href.split('?')[0];
-            })
+            const modal = document.querySelector('.modal');
+            if(modal) {
+                modal.addEventListener('click', (e) => {
+                    if(e.target == modal) window.location.href = window.location.href.split('?')[0];
+                })
+            }
         });
 
 
