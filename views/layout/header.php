@@ -22,7 +22,7 @@
     <meta name="twitter:description" content="Зручний імпортер розкладу для Google Calendar. Введіть вашу групу та залишайтеся в курсі актуального розкладу занять, внесеного у ваш календар з http://rozklad.kpi.ua">
     <meta name="twitter:image" content="<?php echo $_ENV['APP_URL'] . $_ENV['APP_ROOT_PATH'] ?>/static/img/rozklad_importer.png">
 
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/style.css?v=1">
     <link rel="shortcut icon" href="static/img/favicon.png" type="image/png" sizes="100x100">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
