@@ -25,6 +25,17 @@ class ScheduleController
         echo json_encode($schedule);
     }
 
+    public function id($request)
+    {
+        if (!isset($_GET['group'])) {
+            return null;
+        }
+        
+        $groups = $this->rozkladParserService->fetchGroupIds($_GET['group']);
+        header('Content-Type: application/json');
+        echo json_encode($groups);
+    }
+
     public function groups($request)
     {
         header('Content-Type: application/json');

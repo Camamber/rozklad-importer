@@ -17,16 +17,17 @@ class RozkladParserService
         $this->schedule = [];
     }
 
-    public function parse($group)
+    public function parse($groupId)
     {
-        $this->schedule = ['group' => $group];
-
-        $body = $this->fetchRozklad($group);
+        $body = $this->fetchRozklad($groupId);
 
         $doc = new DOMDocument('1.0', 'UTF-8');
         $internalErrors = libxml_use_internal_errors(true);
         $doc->loadHTML($body);
         libxml_use_internal_errors($internalErrors);
+
+        $title = $doc->getElementById('ctl00_MainContent_lblHeader');
+        $this->schedule = ['group' => trim(str_replace('Розклад занять для', '', $title->textContent))];
 
         $tables = $doc->getElementsByTagName('table');
 
@@ -36,10 +37,13 @@ class RozkladParserService
         return $this->schedule;
     }
 
-    private function fetchRozklad($group)
+    public function fetchGroupIds($groupName)
     {
+        $arr = [];
+
         $client = new Client();
         $response = $client->request('POST', 'http://rozklad.kpi.ua/Schedules/ScheduleGroupSelection.aspx', [
+            'allow_redirects' => false,
             'headers' => [
                 'Origin' => 'http://rozklad.kpi.ua',
                 'Content-Type' => 'application/x-www-form-urlencoded',
@@ -50,10 +54,43 @@ class RozkladParserService
                 '__VIEWSTATE' => '/wEMDAwQAgAADgEMBQAMEAIAAA4BDAUDDBACAAAOAgwFBwwQAgwPAgEIQ3NzQ2xhc3MBD2J0biBidG4tcHJpbWFyeQEEXyFTQgUCAAAADAUNDBACAAAOAQwFAQwQAgAADgEMBQ0MEAIMDwEBBFRleHQBG9Cg0L7Qt9C60LvQsNC0INC30LDQvdGP0YLRjAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALVdjzppTCyUtNVSyV7xykGQzHz2',
                 '__EVENTTARGET' => '',
                 '__EVENTARGUMENT' => '',
-                'ctl00$MainContent$ctl00$txtboxGroup' => $group,
+                'ctl00$MainContent$ctl00$txtboxGroup' => $groupName,
                 'ctl00$MainContent$ctl00$btnShowSchedule' => 'Розклад+занять',
                 '__EVENTVALIDATION' => '/wEdAAEAAAD/////AQAAAAAAAAAPAQAAAAUAAAAIsA3rWl3AM+6E94I5Tu9cRJoVjv0LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHfLZVQO6kVoZVPGurJN4JJIAuaU'
             ]
+        ]);
+
+        if ($response->getStatusCode() == 302) {
+            $groupUrl = $response->getHeaderLine('Location');
+            $arr[] =  ['name' => $groupName, 'id' => str_replace('/Schedules/ViewSchedule.aspx?g=', '', $groupUrl)];
+        } else {
+
+            $body = $response->getBody()->getContents();
+
+            $doc = new DOMDocument('1.0', 'UTF-8');
+            $internalErrors = libxml_use_internal_errors(true);
+            $doc->loadHTML($body);
+            libxml_use_internal_errors($internalErrors);
+
+            $table = $doc->getElementById('ctl00_MainContent_ctl00_GroupListPanel')->getElementsByTagName('table');
+            foreach ($table[0]->getElementsByTagName('a') as $a) {
+                $id = str_replace('ViewSchedule.aspx?g=', '', $a->getAttribute('href'));
+                $arr[] = ['name' => $a->textContent, 'id' => $id ];
+            }
+        }
+        return $arr;
+    }
+
+    private function fetchRozklad($groupId)
+    {
+        $client = new Client();
+        $response = $client->request('POST', 'http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx', [
+            'query' => ['g' =>  $groupId],
+            'headers' => [
+                'Origin' => 'http://rozklad.kpi.ua',
+                'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36',
+                'Referer' => 'http://rozklad.kpi.ua/Schedules/ScheduleGroupSelection.aspx'
+            ],
         ]);
 
         return $response->getBody()->getContents();

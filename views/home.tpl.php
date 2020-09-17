@@ -17,10 +17,11 @@
                 <img class="w-100" src="static/img/importer_logo.png" alt="KPI ROZKLAD Importer">
             </div>
         </div>
-        <form method="get">
+        <form method="get" id="form">
             <div class="row justify-content-center mt-3 pb-md-3">
                 <div class="col-12 col-md-8 col-lg-6">
-                    <input class="w-100" id="group" name="group" autocomplete="off" type="text" placeholder="Вкажіть вашу групу">
+                    <input class="w-100 " id="group" name="group" autocomplete="off" type="text" placeholder="Вкажіть вашу групу">
+                    <span class="input-error-hint" style="display: none;">Такої групи не існує, котику. Спробуй ще раз.</span>
                     <div style="position:relative;">
                         <ul class="w-100 hint-list">
                         </ul>
@@ -34,9 +35,40 @@
                 </div>
             </div>
         </form>
+
+
+        <!-- Modal -->
+        <div class="modal fade <?php echo isset($groupIds) ? 'show pt-5' : ''  ?>" id="exampleModal" tabindex="-1" role="dialog" style="<?php echo isset($groupIds) ? 'display: block;' : 'display: none;'  ?>" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!-- <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div> -->
+                    <div class="modal-body">
+                        <ul>
+                            <?php foreach ($groupIds as $value) { ?>
+                                <li><a href="?group_id=<?php echo $value['id'] ?>"><?php echo $value['name'] ?></a></li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
     </div>
 
+    <?php if (isset($groupIds)) { ?>
+        <div class="modal-backdrop fade show"></div>
+    <?php } ?>
+
     <script>
+        let lastGroupResponse = null;
         document.addEventListener("DOMContentLoaded", () => {
             const body = document.querySelector('body');
             const ul = document.querySelector('.hint-list')
@@ -51,14 +83,34 @@
             input.addEventListener('click', () => {
                 if (ul.children.length) showHint(input, ul)
             })
+
+
+            const form = document.getElementById('form');
+            form.addEventListener('submit', (e) => {
+                if (lastGroupResponse && lastGroupResponse.length) {
+                    const group = lastGroupResponse.find(g => g.toLocaleLowerCase() == input.value.toLocaleLowerCase())
+                    if(group) {
+                        input.value = group; 
+                        return; 
+                    } 
+                }
+
+                e.preventDefault()
+                input.classList.add('input-error');
+                document.querySelector('form .input-error-hint').style['display'] = 'inline';  
+            });
         });
 
+
         function searchGroup(e) {
+            e.target.classList.remove('input-error');
+            document.querySelector('form .input-error-hint').style['display'] = 'none';
             if (!e.target.value.length) return;
 
             fetch('api/groups?query=' + e.target.value, )
                 .then((response) => response.json())
                 .then((data) => {
+                    lastGroupResponse = data;
                     if (!data || !data.length) return;
 
                     const ul = document.querySelector('.hint-list')

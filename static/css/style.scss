@@ -81,6 +81,21 @@ input[type="text"] {
     }
 }
 
+.input-error {
+    border: $primary 2px solid !important;
+    color: $primary;
+}
+
+.input-error-hint {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+    /* identical to box height, or 100% */
+
+
+    color: #FF7C32;
+}
+
 .hint-list {
     padding: 0;
     position: absolute;
