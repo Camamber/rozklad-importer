@@ -87,13 +87,15 @@ input[type="text"] {
 }
 
 .input-error-hint {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 15px;
+    
     font-weight: 500;
     font-size: 12px;
     line-height: 12px;
-    /* identical to box height, or 100% */
 
-
-    color: #FF7C32;
+    color: $primary;
 }
 
 .hint-list {
