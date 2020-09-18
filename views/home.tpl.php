@@ -123,7 +123,8 @@
             fetch('api/groups?query=' + e.target.value, )
                 .then((response) => response.json())
                 .then((data) => {
-                    lastGroupResponse = data;
+                    lastGroupResponse = [...data];
+
                     if (!data || !data.length) return;
 
                     const ul = document.querySelector('.hint-list')

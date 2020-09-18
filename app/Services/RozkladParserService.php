@@ -172,6 +172,6 @@ class RozkladParserService
         $result = array_filter($groups, function ($item) use ($query) {
             return mb_stripos($item, $query, 0, 'UTF-8') !== false;
         });
-        return $result;
+        return array_values($result);
     }
 }
