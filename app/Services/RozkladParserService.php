@@ -75,7 +75,7 @@ class RozkladParserService
             $table = $doc->getElementById('ctl00_MainContent_ctl00_GroupListPanel')->getElementsByTagName('table');
             foreach ($table[0]->getElementsByTagName('a') as $a) {
                 $id = str_replace('ViewSchedule.aspx?g=', '', $a->getAttribute('href'));
-                $arr[] = ['name' => $a->textContent, 'id' => $id ];
+                $arr[] = ['name' => $a->textContent, 'id' => $id];
             }
         }
         return $arr;
@@ -144,7 +144,6 @@ class RozkladParserService
                 }
                 $week[$j - 1][] = $class;
             }
-
         }
         return $week;
     }
@@ -165,5 +164,14 @@ class RozkladParserService
             $json = array_merge($json, $body->d);
         }
         return $json;
+    }
+
+    public function fetchGroupsLocal($query)
+    {
+        $groups = json_decode(file_get_contents('cache/groups.json'));
+        $result = array_filter($groups, function ($item) use ($query) {
+            return mb_stripos($item, $query, 0, 'UTF-8') !== false;
+        });
+        return $result;
     }
 }
