@@ -35,6 +35,36 @@
                 </div>
             </div>
         </form>
+        <div class="row justify-content-center pt-6">
+            <div class="col-12 col-md-10 col-lg-8">
+                <h1 class="mb-0 text-center">About Service</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3 pb-md-4">
+            <div class="col-12 col-md-8 col-lg-8">
+                <p class="mb-0 text-center">This application is designed to easily and quickly import lesson timetables into your google calendar. The app uses google login to manage your calendars and events.</p>
+                <p>
+                    <ul style="color: var(--dark);">
+                        <strong>The service uses the following scopes:</strong>
+                        <li>
+                            the app will request data from the calendar via https://www.googleapis.com/auth/calendar.readonly so that users can manage the schedule in the app.
+                        </li>
+                        <li>
+                            the app will create calendars via https://www.googleapis.com/auth/calendar so that users can manage the schedule in the app.
+                        </li>
+                        <li>
+                            the app will create events via https://www.googleapis.com/auth/calendar.events so that users can manage the schedule in the app.
+                        </li>
+                        <li>
+                            the app will request a list of claendar events via https://www.googleapis.com/auth/calendar.events.readonly so that users can manage the schedule in the app. 
+                        </li>
+                    </ul>
+                </p>
+                <p>Please read our privacy policy before use
+                <a href="privacy" >Privacy Policy</a>
+                </p>
+            </div>
+        </div>
 
 
         <!-- Modal -->
@@ -80,7 +110,7 @@
             body.addEventListener('click', (e) => {
                 if (e.target != input) hideHint(input, ul);
             })
-            
+
             input.addEventListener('click', () => {
                 if (ul.children.length) showHint(input, ul)
             })
@@ -90,15 +120,15 @@
             form.addEventListener('submit', (e) => {
                 if (lastGroupResponse && lastGroupResponse.length) {
                     const group = lastGroupResponse.find(g => g.toLocaleLowerCase() == input.value.toLocaleLowerCase())
-                    if(group) {
-                        input.value = group; 
-                        return; 
-                    } 
+                    if (group) {
+                        input.value = group;
+                        return;
+                    }
                 }
 
                 e.preventDefault()
                 input.classList.add('input-error');
-                document.querySelector('form .input-error-hint').style['display'] = 'inline';  
+                document.querySelector('form .input-error-hint').style['display'] = 'inline';
             });
 
             const modalClose = document.querySelector('.modal .close');
@@ -107,9 +137,9 @@
             })
 
             const modal = document.querySelector('.modal');
-            if(modal) {
+            if (modal) {
                 modal.addEventListener('click', (e) => {
-                    if(e.target == modal) window.location.href = window.location.href.split('?')[0];
+                    if (e.target == modal) window.location.href = window.location.href.split('?')[0];
                 })
             }
         });
