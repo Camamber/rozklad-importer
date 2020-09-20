@@ -44,7 +44,7 @@ class ScheduleController
             echo json_encode([]);
         }
         
-        $groups = $this->rozkladParserService->fetchGroupsLocal($_GET['query']);
+        $groups = $this->rozkladParserService->fetchGroups($_GET['query']);
         echo json_encode($groups);
     }
 }
