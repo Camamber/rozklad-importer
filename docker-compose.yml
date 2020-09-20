@@ -15,7 +15,7 @@ services:
   php:
     image: php:7-fpm
     volumes:
-      - ./:/code
+      - ./:/var/www/app
   certbot:
     image: certbot/certbot
     volumes:
