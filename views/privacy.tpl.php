@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html>
+<?php include('layout/header.php') ?>
 
-<head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width'>
-    <title>Privacy Policy</title>
-    <style>
-        body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            padding: 1em;
-        }
-    </style>
-</head>
-
-<body>
+<body class="home-bg pt-5 pb-5">
     <div class="container">
-        <strong>Privacy Policy</strong>
+        <h1>Privacy Policy</h1>
         <p>
             Camamber built the Rozklad Importer app as
             a Free app. This SERVICE is provided by
@@ -41,10 +28,15 @@
         </p>
         <p><strong>Information Collection and Use</strong></p>
         <p>
-            For a better experience, while using our Service, I
-            may require you to provide us with certain personally
-            identifiable information, including but not limited to email, name. The information that
-            I request will be retained on your device and is not collected by me in any way.
+            We collect information from or about you in the following ways:</br>
+            Information provided by you. Information provided by you when you create or update your account(s); while you use our tools or services; when you use any of our services for purchases or financial transactions; and while you are receiving customer service support.
+            Information we get or generate from your use of our services. We collect data related to: the services that you use and how you use them, and your activities when you install or access our services.
+            Information collected from external sources. We may receive information about you and your activities from third parties when you link to external accounts (such as Facebook, Google, Twitter, VK, Discord, Steam or Twitch) and from advertisers or service providers about your experiences or interactions with them. We might also obtain information from public sites on the internet, such as Twitch, Instagram and YouTube, to mention a few. For example, if you login to a site or app using Facebook Connect you may be asked if you wish to share information from your Facebook account with us. If you use a "like" or a "share" button for a feature on our sites or apps, then the third party may share information with us.
+            We treat all information associated with your account as personal information.
+        </p>
+        <p>
+            We use the information we collect only in compliance with this Privacy Policy. We will never sell your Personal Information to any third party.
+            In addition to the uses identified elsewhere in this Privacy Policy, we may use your Personal Information to: (a) improve your browsing experience (b) send information to you which we think may be of interest to you by email (c) send you marketing communications relating to our business.
         </p>
         <div>
             <p>
@@ -56,31 +48,7 @@
                 by the app
             </p>
             <ul>
-                <li><a href="https://www.google.com/policies/privacy/" target="_blank" rel="noopener noreferrer">Google
-                        Play
-                        Services</a></li>
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
-                <!---->
+                <li><a href="https://www.google.com/policies/privacy/" target="_blank" rel="noopener noreferrer">Google Privacy</a></li>
             </ul>
         </div>
         <p><strong>Log Data</strong></p>
@@ -116,7 +84,7 @@
             I may employ third-party companies and
             individuals due to the following reasons:
         </p>
-        <ul>
+        <ul style="color: var(--dark);">
             <li>To facilitate our Service;</li>
             <li>To provide the Service on our behalf;</li>
             <li>To perform Service-related services; or</li>
@@ -175,7 +143,12 @@
             If you have any questions or suggestions about my
             Privacy Policy, do not hesitate to contact me at egorka.k2009@gmail.com.
         </p>
+        <div class="row justify-content-center mt-5">
+            <div class="col-10 col-md-4 col-lg-3 col-xl-2 mt-3 mt-sm-0">
+                <a class="btn btn-secondary w-100" href="<?php echo $_ENV['APP_ROOT_PATH'] ?>/">На головну</a>
+            </div>
+        </div>
     </div>
 </body>
 
-</html>
+<?php include('layout/footer.php') ?>

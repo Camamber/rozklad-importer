@@ -26,7 +26,7 @@ class Controller
             $groupIds = $this->rozkladParserService->fetchGroupIds($_GET['group']);
             if (count($groupIds) > 1) {
                 return include('views/home.tpl.php');
-            } else if(count($groupIds) > 0) {
+            } else if (count($groupIds) > 0) {
                 $groupId = end($groupIds)['id'];
                 header('Location: ' . filter_var($_ENV['APP_URL'] . $_ENV['APP_ROOT_PATH'] . '/?group_id=' . $groupId, FILTER_SANITIZE_URL));
                 return;
@@ -71,5 +71,10 @@ class Controller
     public function maintance($request)
     {
         return include('views/maintance.tpl.php');
+    }
+
+    public function privacy($request)
+    {
+        return include('views/privacy.tpl.php');
     }
 }
