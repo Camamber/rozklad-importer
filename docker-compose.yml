@@ -1,6 +1,6 @@
 version: "3"
 services:
-  web:
+  nginx:
     image: nginx:latest
     ports:
       - "80:80"
