@@ -4,6 +4,7 @@ namespace App\Classes;
 
 use App\Models\User;
 use Google_Client;
+use Google_Service;
 use Google_Service_Calendar;
 use Google_Service_Oauth2;
 
@@ -26,7 +27,9 @@ class GoogleClient
                 // Google_Service_Oauth2::USERINFO_EMAIL,
                 // Google_Service_Oauth2::USERINFO_PROFILE,
                 Google_Service_Calendar::CALENDAR,
+                Google_Service_Calendar::CALENDAR_READONLY,
                 Google_Service_Calendar::CALENDAR_EVENTS,
+                Google_Service_Calendar::CALENDAR_EVENTS_READONLY
             ]);
             self::$instance->setAccessType('offline');
         }
