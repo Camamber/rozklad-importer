@@ -35,12 +35,12 @@
                 </div>
             </div>
         </form>
-        <div class="row justify-content-center pt-6">
+        <!--<div class="row justify-content-center pt-6">
             <div class="col-12 col-md-10 col-lg-8">
                 <h1 class="mb-0 text-center">About Service</h1>
             </div>
         </div>
-        <div class="row justify-content-center mt-3 pb-md-4">
+         <div class="row justify-content-center mt-3 pb-md-4">
             <div class="col-12 col-md-8 col-lg-8">
                 <p class="mb-0 text-center">This application is designed to easily and quickly import lesson timetables into your google calendar. The app uses google login to manage your calendars and events.</p>
                 <p>
@@ -64,7 +64,7 @@
                 <a href="privacy" >Privacy Policy</a>
                 </p>
             </div>
-        </div>
+        </div> -->
 
 
         <!-- Modal -->
