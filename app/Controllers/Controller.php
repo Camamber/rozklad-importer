@@ -23,7 +23,10 @@ class Controller
         }
 
         if (isset($_GET['group'])) {
-            $groupIds = $this->rozkladParserService->fetchGroupIds($_GET['group']);
+            $groupIds = Cache::remember('fetchGroupIds' . $_GET['group'], 12 * 60 * 60, function () {
+                return $this->rozkladParserService->fetchGroupIds($_GET['group']);
+            });
+
             if (count($groupIds) > 1) {
                 return include('views/home.tpl.php');
             } else if (count($groupIds) > 0) {
