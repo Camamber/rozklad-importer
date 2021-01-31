@@ -27,7 +27,7 @@ class ScheduleImporterService
 
         $firstSeptember = Carbon::now()->timezone('Europe/Kiev')->startOfMonth()->month(9);
         if ($firstSeptember->greaterThan(Carbon::now())) {
-            $firstSeptember = $firstSeptember->subYear();
+            $firstSeptember = Carbon::now()->timezone('Europe/Kiev')->startOfMonth()->month(2);
         }
 
         foreach ($schedule['weeks'] as $weekNumber => $week) {
@@ -50,7 +50,7 @@ class ScheduleImporterService
                         'description' => $description,
                         'start' => ['dateTime' => $startDate->toRfc3339String(), 'timeZone' => 'Europe/Kiev'],
                         'end' => ['dateTime' => $endDate->toRfc3339String(), 'timeZone' => 'Europe/Kiev'],
-                        'recurrence' => ['RRULE:FREQ=WEEKLY;WKST=MO;INTERVAL=2'],
+                        'recurrence' => ['RRULE:FREQ=WEEKLY;WKST=MO;;UNTIL=20210610;INTERVAL=2'],
                         'reminders' => [
                             'useDefault' => FALSE,
                             'overrides' => [
