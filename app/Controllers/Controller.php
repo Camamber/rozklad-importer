@@ -46,6 +46,8 @@ class Controller
             $scheduleImporterService = new ScheduleImporterService();
             $scheduleImporterService->import($schedule);
 
+            setcookie("group", $schedule['group']);
+            setcookie('group_id', $_GET['group_id']);
             header('Location: ' . filter_var($_ENV['APP_URL'] . $_ENV['APP_ROOT_PATH'] . '/success', FILTER_SANITIZE_URL));
         } else {
             $_SESSION['ORIGIN_URL'] = $_ENV['APP_URL'] . $_SERVER['REQUEST_URI'];
