@@ -150,6 +150,8 @@
             document.querySelector('form .input-error-hint').style['display'] = 'none';
             if (!e.target.value.length || e.target.value.length < 2) return;
 
+            gtag('event', 'search', { search_term: e.target.value});
+
             fetch('api/groups?query=' + e.target.value, )
                 .then((response) => response.json())
                 .then((data) => {
