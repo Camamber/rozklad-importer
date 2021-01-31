@@ -85,12 +85,15 @@ class RozkladParserService
     {
         $client = new Client();
         $response = $client->request('POST', 'http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx', [
-            'query' => ['g' =>  $groupId],
             'headers' => [
                 'Origin' => 'http://rozklad.kpi.ua',
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36',
                 'Referer' => 'http://rozklad.kpi.ua/Schedules/ScheduleGroupSelection.aspx'
             ],
+            'query' => ['g' =>  $groupId],
+            'form_params' => [
+                'ctl00$MainContent$ddlSemesterType' => '2'
+            ]
         ]);
 
         return $response->getBody()->getContents();
