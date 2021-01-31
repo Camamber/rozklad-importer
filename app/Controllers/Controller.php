@@ -19,6 +19,8 @@ class Controller
     public function show($request)
     {
         if (!isset($_GET['group']) && !isset($_GET['group_id'])) {
+            setcookie("group", "", time() - 3600);
+            setcookie("group_id", "", time() - 3600);
             return include('views/home.tpl.php');
         }
 
