@@ -45,12 +45,11 @@ class ControllerNew
             throw new \App\Exceptions\EmptyScheduleException($group->title, $group->uuid);
         }
 
-        $schedule = $group->schedules->first()->schedule;
         if (isset($_SESSION['access_token']) && $_SESSION['access_token'] && $_SESSION['access_token']['created'] + $_SESSION['access_token']['expires_in'] > time()) {
             GoogleClient::setAccessToken($_SESSION['access_token']);
 
             $scheduleImporterService = new ScheduleImporterService();
-            $scheduleImporterService->import($schedule);
+            $scheduleImporterService->import($group);
             
             header('Location: ' . filter_var($_ENV['APP_URL'] . $_ENV['APP_ROOT_PATH'] . '/success', FILTER_SANITIZE_URL));
         } else {

@@ -21,16 +21,17 @@ class ScheduleImporterService
         $this->service = new Google_Service_Calendar(GoogleClient::getInstance());
     }
 
-    public function import($schedule)
+    public function import($group)
     {
         $events = [];
+        $schedule = $group->schedules->first()->schedule;
 
         $firstSeptember = Carbon::now()->timezone('Europe/Kiev')->startOfMonth()->month(9);
         if ($firstSeptember->greaterThan(Carbon::now())) {
             $firstSeptember = Carbon::now()->timezone('Europe/Kiev')->startOfMonth()->month(2);
         }
 
-        foreach ($schedule['weeks'] as $weekNumber => $week) {
+        foreach ($schedule as $weekNumber => $week) {
             $dateTime = $firstSeptember->clone()->startOfWeek();
             if ($weekNumber) {
                 $dateTime = $dateTime->addWeek();
@@ -65,7 +66,7 @@ class ScheduleImporterService
         }
 
         $time_start_calendar = microtime(true);
-        $calendarId = $this->createCalendar('Розклад занять ' . $schedule['group']);
+        $calendarId = $this->createCalendar('Розклад занять ' . $group->title);
         $time_elapsed_calendar = microtime(true) - $time_start_calendar;
 
         $time_start_events = microtime(true);
@@ -75,7 +76,7 @@ class ScheduleImporterService
         $time_elapsed_events = microtime(true) - $time_start_events;
 
         $time_elapsed_total = $time_elapsed_calendar + $time_elapsed_events;
-        $context = array_merge(['group' => $schedule['group']], GoogleClient::user()->toArray());
+        $context = array_merge(['group' => $group->title], GoogleClient::user()->toArray());
         Log::info("Import schedule: calendar - $time_elapsed_calendar; events - $time_elapsed_events; total - $time_elapsed_total", $context);
     }
 
