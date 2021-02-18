@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Group;
+use App\Models\Schedule;
 use App\Services\RozkladParserService;
 
 class ScheduleController
@@ -20,7 +22,8 @@ class ScheduleController
         }
 
 
-        $schedule = $this->rozkladParserService->parse($_GET['group']);
+        // $schedule = $this->rozkladParserService->parse($_GET['group']);
+        $schedule = Schedule::find($_GET['group']);
         header('Content-Type: application/json');
         echo json_encode($schedule);
     }
@@ -30,7 +33,7 @@ class ScheduleController
         if (!isset($_GET['group'])) {
             return null;
         }
-        
+
         $groups = $this->rozkladParserService->fetchGroupIds($_GET['group']);
         header('Content-Type: application/json');
         echo json_encode($groups);
@@ -43,8 +46,10 @@ class ScheduleController
         if (!isset($_GET['query']) || strlen($_GET['query']) < 2) {
             echo json_encode([]);
         }
-        
-        $groups = $this->rozkladParserService->fetchGroups($_GET['query']);
+
+        // $groups = $this->rozkladParserService->fetchGroups($_GET['query']);
+        $groups = Group::where('title', 'LIKE', $_GET['query'] . '%')->pluck('title');
+
         echo json_encode($groups);
     }
 }

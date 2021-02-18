@@ -48,15 +48,15 @@ class Router
 
 
     public static function handleException(\Exception $exception)
-    {   
+    {
         $message = sprintf("%s: %s\n in %s:%d", get_class($exception), $exception->getMessage(), $exception->getFile(), $exception->getLine());
         Log::error($message);
 
         if (!($exception instanceof \App\Exceptions\AppException)) {
             $exception = \App\Exceptions\AppException::fromException($exception);
         }
-        
+
         $controller = new \App\Controllers\ErrorController();
-        $controller->index(['message' => $exception->getPublicMessage(), 'image' => $exception->getPublicImage()], $exception->getCode());
+        $controller->index(['type' => get_class($exception), 'message' => $exception->getPublicMessage(), 'image' => $exception->getPublicImage()], $exception->getCode());
     }
 }

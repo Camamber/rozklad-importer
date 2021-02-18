@@ -25,7 +25,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
-            <?php if (isset($_COOKIE["group"]) && isset($_COOKIE["group_id"])) { ?>
+            <?php if (isset($_COOKIE["group"])) { ?>
                 gtag('event', 'imported', {
                     'event_category': 'Schedule',
                     'event_label': '<?php echo $_COOKIE["group"] ?>',

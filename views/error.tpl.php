@@ -23,6 +23,16 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            <?php if (isset($_COOKIE["group"])) { ?>
+                gtag('event', '<?php echo $errObj['type']?>', {
+                    'event_category': 'Schedule',
+                    'event_label': '<?php echo $_COOKIE["group"] ?>',
+                });
+            <?php } ?>
+        });
+    </script>
 </body>
 
 <?php include('layout/footer.php') ?>

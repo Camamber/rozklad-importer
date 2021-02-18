@@ -68,7 +68,7 @@
 
 
         <!-- Modal -->
-        <div class="modal fade <?php echo isset($groupIds) ? 'show pt-6 pt-md-5' : ''  ?>" id="exampleModal" tabindex="-1" role="dialog" style="<?php echo isset($groupIds) ? 'display: block;' : 'display: none;'  ?>" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade <?php echo count($groups) ? 'show pt-6 pt-md-5' : ''  ?>" id="exampleModal" tabindex="-1" role="dialog" style="<?php echo isset($groupIds) ? 'display: block;' : 'display: none;'  ?>" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -79,8 +79,8 @@
                     </div>
                     <div class="modal-body">
                         <ul>
-                            <?php foreach ($groupIds as $value) { ?>
-                                <li><a href="?group_id=<?php echo $value['id'] ?>"><?php echo $value['name'] ?></a></li>
+                            <?php foreach ($groups as $value) { ?>
+                                <li><a href="?group_id=<?php echo $value['id'] ?>"><?php echo $value['title'] ?></a></li>
                             <?php } ?>
                         </ul>
                     </div>

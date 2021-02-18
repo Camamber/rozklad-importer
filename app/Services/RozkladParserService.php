@@ -62,7 +62,7 @@ class RozkladParserService
 
         if ($response->getStatusCode() == 302) {
             $groupUrl = $response->getHeaderLine('Location');
-            $arr[] =  ['name' => $groupName, 'id' => str_replace('/Schedules/ViewSchedule.aspx?g=', '', $groupUrl)];
+            $arr[] =  ['title' => $groupName, 'id' => str_replace('/Schedules/ViewSchedule.aspx?g=', '', $groupUrl)];
         } else {
 
             $body = $response->getBody()->getContents();
@@ -75,7 +75,7 @@ class RozkladParserService
             $table = $doc->getElementById('ctl00_MainContent_ctl00_GroupListPanel')->getElementsByTagName('table');
             foreach ($table[0]->getElementsByTagName('a') as $a) {
                 $id = str_replace('ViewSchedule.aspx?g=', '', $a->getAttribute('href'));
-                $arr[] = ['name' => $a->textContent, 'id' => $id];
+                $arr[] = ['title' => $a->textContent, 'id' => $id];
             }
         }
         return $arr;
