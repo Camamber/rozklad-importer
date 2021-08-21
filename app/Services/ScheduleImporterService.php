@@ -27,7 +27,7 @@ class ScheduleImporterService
         $schedule = $group->schedules->first()->schedule;
 
         $firstSeptember = Carbon::now()->timezone('Europe/Kiev')->startOfMonth()->month(9);
-        if ($firstSeptember->greaterThan(Carbon::now())) {
+        if ($firstSeptember->greaterThan(Carbon::now()->subMonth())) {
             $firstSeptember = Carbon::now()->timezone('Europe/Kiev')->startOfMonth()->month(2);
         }
 
@@ -51,7 +51,7 @@ class ScheduleImporterService
                         'description' => $description,
                         'start' => ['dateTime' => $startDate->toRfc3339String(), 'timeZone' => 'Europe/Kiev'],
                         'end' => ['dateTime' => $endDate->toRfc3339String(), 'timeZone' => 'Europe/Kiev'],
-                        'recurrence' => ['RRULE:FREQ=WEEKLY;WKST=MO;;UNTIL=20210610;INTERVAL=2'],
+                        'recurrence' => ['RRULE:FREQ=WEEKLY;WKST=MO;;UNTIL=20220117;INTERVAL=2'],
                         'reminders' => [
                             'useDefault' => FALSE,
                             'overrides' => [
@@ -64,6 +64,8 @@ class ScheduleImporterService
                 }
             }
         }
+
+
 
         $time_start_calendar = microtime(true);
         $calendarId = $this->createCalendar('Розклад занять ' . $group->title);
@@ -106,5 +108,18 @@ class ScheduleImporterService
 
         $createdCalendar = $this->service->calendars->insert($calendar);
         return $createdCalendar->getId();
+    }
+
+    private function addAdditionalEvents($group, &$events)
+    {
+        if (!preg_match('/.+-([0-9])[0-9]+$/', $group, $matches)) {
+            return;
+        }
+
+        $year = $matches[1];
+
+        if (in_array($year, [1, 0, 9])) {
+            
+        }
     }
 }
