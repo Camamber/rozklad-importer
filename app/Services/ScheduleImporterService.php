@@ -27,7 +27,7 @@ class ScheduleImporterService
         $schedule = $group->schedules->first()->schedule;
 
         $firstSeptember = Carbon::now()->timezone('Europe/Kiev')->startOfMonth()->month(9);
-        if ($firstSeptember->greaterThan(Carbon::now()->subMonth())) {
+        if ($firstSeptember->greaterThan(Carbon::now()->addMonth())) {
             $firstSeptember = Carbon::now()->timezone('Europe/Kiev')->startOfMonth()->month(2);
         }
 
@@ -38,6 +38,10 @@ class ScheduleImporterService
             }
 
             foreach ($week as $dayNumber => $day) {
+                if ($dateTime->clone()->addDays($dayNumber)->lessThan($firstSeptember)) {
+                    $dayNumber += 14;
+                }
+
                 foreach ($day as $class) {
                     $startDate = $dateTime->clone()->addDays($dayNumber)->setTimeFromTimeString($class['time']);
                     $endDate = $startDate->clone()->addMinutes(95);
@@ -119,7 +123,6 @@ class ScheduleImporterService
         $year = $matches[1];
 
         if (in_array($year, [1, 0, 9])) {
-            
         }
     }
 }
